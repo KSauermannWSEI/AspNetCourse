@@ -1,0 +1,6 @@
+@URL = http://localhost:55555/api
+
+###
+
+GET {{URL}}/shared
+Content-Type: application/json
