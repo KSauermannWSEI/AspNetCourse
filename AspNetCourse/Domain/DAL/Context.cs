@@ -16,7 +16,9 @@ namespace Domain.DAL
         public DbSet<Price> Prices { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<Visit> Visits { get; set; }
-
+        /// <summary>
+        /// Should be used only for migrations.
+        /// </summary>
         public Context()
         {
             sqlServer = ConfigurationHelper.Configuration.GetConnectionString("SQLServer");

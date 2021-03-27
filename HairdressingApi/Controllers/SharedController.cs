@@ -11,9 +11,13 @@ namespace HairdressingApi.Controllers
     [ApiController]
     public class SharedController : ControllerBase
     {
+        public SharedController()
+        {           
+        }             
+
         [HttpGet]
         public bool Get()
-        {
+        {          
             return true;
         }
     }

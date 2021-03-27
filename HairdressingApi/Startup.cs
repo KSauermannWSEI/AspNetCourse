@@ -1,12 +1,16 @@
+using Domain.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Repositories.Interfaces;
+using Repositories.Repos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +30,11 @@ namespace HairdressingApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<DbContext, Context>();
+            services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLServer")));
+            services.AddTransient<IPricesRepository, PricesRepository>(); //Dependency Injection
+            //services.AddScoped<IPricesRepository, PricesRepository>();
+            //services.AddSingleton<IPricesRepository, PricesRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
