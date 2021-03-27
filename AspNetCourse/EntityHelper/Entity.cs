@@ -8,6 +8,6 @@ namespace EntityHelper
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]       
-        public int Id { get; set; }        
+        public int Id2 { get; set; }        
     }
 }
