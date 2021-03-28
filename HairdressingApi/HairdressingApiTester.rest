@@ -1,7 +1,13 @@
 @URL = http://localhost:55555/api
+
 ###
-GET {{URL}}/prices/
+GET {{URL}}/prices
 Content-Type: application/json
+
+###
+GET  {{URL}}/availableservices
+Content-Type: application/json
+
 ###
 GET {{URL}}/prices/GetByOk/tym razem ok
 Content-Type: application/json
@@ -27,7 +33,7 @@ Content-Type: application/json
   "currency": "PLN"
 }
 ###
-DELETE {{URL}}/prices/1
+DELETE {{URL}}/prices/13333
 ###
 POST {{URL}}/availableservices
 Content-Type: application/json
@@ -40,5 +46,5 @@ Content-Type: application/json
 GET {{URL}}/servicetypes/
 Content-Type: application/json
 ###
-GET  {{URL}}/availableservices/1
+GET  {{URL}}/availableservices
 Content-Type: application/json

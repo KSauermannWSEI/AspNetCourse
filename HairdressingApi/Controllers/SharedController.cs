@@ -47,6 +47,7 @@ namespace HairdressingApi.Controllers
             var item = await repository.GetAsync(id);
             if (item == null)
             {
+                Logger.LogWarning($"Item id={id} not found. Method={nameof(Get)}");
                 return NotFound();
             }
             return Ok(item);
@@ -62,6 +63,7 @@ namespace HairdressingApi.Controllers
         [HttpPost]
         public async Task<ActionResult<T>> Post(T item)
         {
+            Logger.LogInformation("Post init");
             await repository.AddAsync(item);
             await repository.SaveChangesAsync();
             return CreatedAtAction(nameof(Get), new { id = item.Id }, item);
@@ -71,6 +73,7 @@ namespace HairdressingApi.Controllers
         {
             if (id != item.Id)
             {
+                Logger.LogWarning($"Item id not equal to id. Method={nameof(Get)}");
                 return BadRequest();
             }
             await repository.UpdateAsync(item);
@@ -78,14 +81,16 @@ namespace HairdressingApi.Controllers
             {
                 await repository.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
+                Logger.LogError(ex, ex.Message);
                 if (!repository.FindBy(a => a.Id == id).Any())
                 {
+                    Logger.LogWarning($"Item id={id} not found. Method={nameof(Put)}");
                     return NotFound();
                 }
                 throw;
-            }
+            }           
             return NoContent();
         }
         [HttpDelete("{id}")]
@@ -94,6 +99,7 @@ namespace HairdressingApi.Controllers
             var item = await repository.GetAsync(id);
             if (item == null)
             {
+                Logger.LogWarning($"Item id={id} not found. Method={nameof(Delete)}");
                 return NotFound();
             }
             await repository.DeleteAsync(id);
