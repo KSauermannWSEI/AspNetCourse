@@ -1,20 +1,18 @@
-﻿using Domain.DAL;
-using Domain.Models;
-using Microsoft.AspNetCore.Http;
+﻿using ApiKeyAuth.Attributes;
+using Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Repositories.Interfaces;
-using Repositories.Repos;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace HairdressingApi.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController] 
     public abstract class SharedController<T> : ControllerBase where T: EntityHelper.Entity
     {
         private readonly IRepository<T> repository;
@@ -25,7 +23,7 @@ namespace HairdressingApi.Controllers
             this.repository = repository;
             Logger = logger;
         }
-
+        
         [HttpGet]
         //public async Task<List<T>> Get()
         public async Task<IActionResult> Get()
@@ -41,7 +39,7 @@ namespace HairdressingApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id}")]   
         public async Task<IActionResult> Get(int id)
         {
             var item = await repository.GetAsync(id);
@@ -61,6 +59,7 @@ namespace HairdressingApi.Controllers
         //}
 
         [HttpPost]
+        [KeyAuthorize(RoleType.Customer, RoleType.Employee)]
         public async Task<ActionResult<T>> Post(T item)
         {
             Logger.LogInformation("Post init");
@@ -69,6 +68,7 @@ namespace HairdressingApi.Controllers
             return CreatedAtAction(nameof(Get), new { id = item.Id }, item);
         }
         [HttpPut("{id}")]
+        [KeyAuthorize(RoleType.Employee)]
         public async Task<ActionResult> Put(int id, T item)
         {
             if (id != item.Id)
@@ -94,6 +94,7 @@ namespace HairdressingApi.Controllers
             return NoContent();
         }
         [HttpDelete("{id}")]
+        [KeyAuthorize(RoleType.Employee)]
         public async Task<ActionResult<T>> Delete(int id)
         {
             var item = await repository.GetAsync(id);

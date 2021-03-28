@@ -12,11 +12,13 @@ Content-Type: application/json
 GET {{URL}}/prices/GetByOk/tym razem ok
 Content-Type: application/json
 ###
-GET {{URL}}/prices/9
+GET {{URL}}/prices/15
 Content-Type: application/json
+
 ###
 POST {{URL}}/prices
 Content-Type: application/json
+api-key: employee-secret
 
 {
   "id": 0,
@@ -24,14 +26,16 @@ Content-Type: application/json
   "currency": "PLN"
 }
 ###
-PUT {{URL}}/prices/1
+PUT {{URL}}/prices/15
 Content-Type: application/json
+api-key: employee-secret
 
 {
-  "id": 1,
-  "priceValue": 369,
+  "id": 15,
+  "priceValue": 750,
   "currency": "PLN"
 }
+
 ###
 DELETE {{URL}}/prices/13333
 ###

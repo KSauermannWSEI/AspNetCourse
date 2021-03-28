@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AspNetCourse\ApiKeyAuth\ApiKeyAuth.csproj" />
+    <ProjectReference Include="..\AspNetCourse\Enums\Enums.csproj" />
     <ProjectReference Include="..\AspNetCourse\Logger\Logger.csproj" />
     <ProjectReference Include="..\AspNetCourse\Repositories\Repositories.csproj" />
   </ItemGroup>

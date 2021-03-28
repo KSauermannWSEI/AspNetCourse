@@ -32,6 +32,7 @@ namespace HairdressingApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddTransient<DbContext, Context>();
             services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLServer")));
             services.AddRepositories();
