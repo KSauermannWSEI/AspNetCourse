@@ -10,28 +10,28 @@ using System.Threading.Tasks;
 
 namespace Repositories.Repos
 {
-    public class PricesRepository : IDisposable, IPricesRepository
+    public class Repository<T> : IDisposable, IRepository<T> where T: EntityHelper.Entity
     {
         private readonly DbContext context;
-        private readonly DbSet<Price> dbSet = null;
+        private readonly DbSet<T> dbSet = null;
 
-        public PricesRepository(DbContext context)
+        public Repository(DbContext context)
         {
             this.context = context;
-            dbSet = context.Set<Price>();
+            dbSet = context.Set<T>();
         }
 
-        public async Task<Price> GetAsync(int id)
+        public async Task<T> GetAsync(int id)
         {
-            //return await context.Set<Price>().FindAsync(id);
+            //return await context.Set<T>().FindAsync(id);
             return await dbSet.FindAsync(id);
         }
 
-        public async Task<List<Price>> GetListAsync()
+        public async Task<List<T>> GetListAsync()
         {
             return await dbSet.AsNoTracking().ToListAsync();
         }
-        public async Task<int> AddAsync(Price item)
+        public async Task<int> AddAsync(T item)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace Repositories.Repos
                 return -1;
             }
         }
-        public async Task<bool> UpdateAsync(Price item)
+        public async Task<bool> UpdateAsync(T item)
         {
             try
             {
@@ -65,9 +65,9 @@ namespace Repositories.Repos
             }
             return false;
         }
-        public IQueryable<Price> FindBy(Expression<Func<Price, bool>> predicate)
+        public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
         {
-            //return dbSet.Where(p => p.PriceValue > 50 && p.PriceValue < 70 || p.Currency != "PLN").AsQueryable();
+            //return dbSet.Where(p => p.TValue > 50 && p.TValue < 70 || p.Currency != "PLN").AsQueryable();
             return dbSet.Where(predicate).AsQueryable();
         }
 

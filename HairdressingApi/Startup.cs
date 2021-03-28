@@ -1,4 +1,6 @@
 using Domain.DAL;
+using Domain.Models;
+using HairdressingApi.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,10 +34,7 @@ namespace HairdressingApi
         {
             services.AddTransient<DbContext, Context>();
             services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLServer")));
-            services.AddTransient<IPricesRepository, PricesRepository>(); //Dependency Injection
-            //services.AddScoped<IPricesRepository, PricesRepository>();
-            //services.AddSingleton<IPricesRepository, PricesRepository>();
-
+            services.AddRepositories();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -62,7 +61,7 @@ namespace HairdressingApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
+            });            
         }
     }
 }
