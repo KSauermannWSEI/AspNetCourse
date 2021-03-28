@@ -13,7 +13,7 @@ namespace HairdressingApi.Controllers
     [Route("api/[controller]")]
     public class PeopleController : SharedController<Person>
     {
-        public PeopleController(IRepository<Person> repository) : base(repository)
+        public PeopleController(IRepository<Person> repository, ILogger<PeopleController> logger) : base(repository, logger)
         {
         }
     }

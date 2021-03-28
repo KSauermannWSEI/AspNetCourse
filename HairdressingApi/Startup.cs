@@ -35,6 +35,7 @@ namespace HairdressingApi
             services.AddTransient<DbContext, Context>();
             services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("SQLServer")));
             services.AddRepositories();
+            services.AddLoggers();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

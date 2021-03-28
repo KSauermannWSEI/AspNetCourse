@@ -15,7 +15,7 @@ namespace HairdressingApi.Controllers
     [Route("api/[controller]")]
     public class AvailableServicesController : SharedController<AvailableService>
     {
-        public AvailableServicesController(IRepository<AvailableService> repository) : base(repository)
+        public AvailableServicesController(IRepository<AvailableService> repository, ILogger<AvailableServicesController> logger) : base(repository, logger)
         {
         }        
     }

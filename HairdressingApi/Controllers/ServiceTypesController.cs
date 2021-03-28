@@ -3,6 +3,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Repositories.Interfaces;
 using Repositories.Repos;
 using System;
@@ -17,7 +18,7 @@ namespace HairdressingApi.Controllers
     
     public class ServiceTypesController : SharedController<ServiceType>
     {
-        public ServiceTypesController(IRepository<ServiceType> repository) : base(repository)
+        public ServiceTypesController(IRepository<ServiceType> repository, ILogger<ServiceTypesController> logger) : base(repository, logger)
         {
 
         }

@@ -3,6 +3,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Repositories.Interfaces;
 using Repositories.Repos;
 using System;
@@ -16,7 +17,7 @@ namespace HairdressingApi.Controllers
     [ApiController]
     public class PricesController : SharedController<Price>
     {
-        public PricesController(IRepository<Price> repository) : base(repository)
+        public PricesController(IRepository<Price> repository, ILogger<PricesController> logger) : base(repository, logger)
         {
         }
     }

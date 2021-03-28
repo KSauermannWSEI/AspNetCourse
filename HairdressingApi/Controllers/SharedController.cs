@@ -3,6 +3,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Repositories.Interfaces;
 using Repositories.Repos;
 using System;
@@ -17,10 +18,12 @@ namespace HairdressingApi.Controllers
     public abstract class SharedController<T> : ControllerBase where T: EntityHelper.Entity
     {
         private readonly IRepository<T> repository;
+        protected ILogger Logger { get; }
 
-        public SharedController(IRepository<T> repository)
+        public SharedController(IRepository<T> repository, ILogger logger)
         {
             this.repository = repository;
+            Logger = logger;
         }
 
         [HttpGet]
@@ -29,10 +32,12 @@ namespace HairdressingApi.Controllers
         {
             try
             {
+                Logger.LogInformation("Enterd method Get");
                 return Ok(await repository.GetListAsync());
             }
             catch (Exception ex)
             {
+                Logger.LogError(ex, ex.Message);
                 return BadRequest(ex.Message);
             }
         }

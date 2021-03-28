@@ -13,7 +13,7 @@ namespace HairdressingApi.Controllers
     [Route("api/[controller]")]
     public class VisitsController : SharedController<Visit>
     {
-        public VisitsController(IRepository<Visit> repository) : base(repository)
+        public VisitsController(IRepository<Visit> repository, ILogger<VisitsController> logger) : base(repository, logger)
         {
         }
     }

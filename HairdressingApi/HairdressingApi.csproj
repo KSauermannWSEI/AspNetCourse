@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AspNetCourse\Logger\Logger.csproj" />
     <ProjectReference Include="..\AspNetCourse\Repositories\Repositories.csproj" />
   </ItemGroup>
 
