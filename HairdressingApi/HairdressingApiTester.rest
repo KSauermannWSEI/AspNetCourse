@@ -2,7 +2,11 @@
 
 ###
 
-GET {{URL}}/prices
+GET {{URL}}/prices/
+Content-Type: application/json
+
+###
+GET {{URL}}/prices/GetByOk/tym razem ok
 Content-Type: application/json
 
 ###

@@ -47,12 +47,13 @@ namespace HairdressingApi.Controllers
             return Ok(item);
         }
 
-        //[HttpGet("{text}")]
-        //[Route("[action]")]
+        //[HttpGet]
+        //[Route("[action]/{text}")]
         //public async Task<IActionResult> GetByOk(string text)
         //{
         //    return Ok(text);
         //}
+
         [HttpPost]
         public async Task<ActionResult<Price>> Post(Price item)
         {
@@ -70,8 +71,7 @@ namespace HairdressingApi.Controllers
             await repository.UpdateAsync(item);
             try
             {
-                await repository.SaveChangesAsync();
-                return NoContent();
+                await repository.SaveChangesAsync();                
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -81,7 +81,7 @@ namespace HairdressingApi.Controllers
                 }
                 throw;
             }
-            return NotFound();
+            return NoContent();
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult<Price>> Delete(int id)
