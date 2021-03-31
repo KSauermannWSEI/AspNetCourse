@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace ApiKeyAuth.Attributes
 {
     public class KeyAuthorizeAttribute : TypeFilterAttribute
-    {
+    {       
         public KeyAuthorizeAttribute(params RoleType[] roles) : base(typeof(AuthorizeMultiplePolicyFilter))
         {
             List<RoleType> list = roles.ToList();
-            if (!roles.Contains(RoleType.Employee))
+            if (roles.Length > 0 && !roles.Contains(RoleType.Employee))
             {                
                 list.Add(RoleType.Employee);
             }

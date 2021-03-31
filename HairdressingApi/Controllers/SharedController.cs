@@ -13,6 +13,7 @@ namespace HairdressingApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController] 
+    //[KeyAuthorize]
     public abstract class SharedController<T> : ControllerBase where T: EntityHelper.Entity
     {
         private readonly IRepository<T> repository;
@@ -23,9 +24,11 @@ namespace HairdressingApi.Controllers
             this.repository = repository;
             Logger = logger;
         }
-        
-        [HttpGet]
+
         //public async Task<List<T>> Get()
+        [HttpGet]        
+        //[AllowAnonymous]
+        //[KeyAuthorize(RoleType.Employee)]
         public async Task<IActionResult> Get()
         {
             try
