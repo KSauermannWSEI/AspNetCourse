@@ -3,6 +3,7 @@
 ###
 GET {{URL}}/prices
 Content-Type: application/json
+api-key: employee-secret
 
 ###
 GET  {{URL}}/availableservices

@@ -21,7 +21,8 @@ namespace ApiKeyAuth.Filters
         private readonly RoleType[] roles;
         const string API_KEY = "api-key";
 
-        public AuthorizeMultiplePolicyFilter(IHttpContextAccessor httpContextAccessor, IConfiguration configuration, params RoleType[] roles)
+        public AuthorizeMultiplePolicyFilter(IHttpContextAccessor httpContextAccessor, 
+            IConfiguration configuration, params RoleType[] roles)
         {
             this.httpContextAccessor = httpContextAccessor;
             repo = new Repo(configuration);
@@ -31,9 +32,11 @@ namespace ApiKeyAuth.Filters
 
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
+            //context.Filters
             //Umożliwiamy przejście do akcji kontrolera gdy akcja posiada atrybut [AllowAnonymous]
             if (context.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor &&
-                controllerActionDescriptor.MethodInfo.GetCustomAttributes(false).Any(a => a is AllowAnonymousAttribute))
+                controllerActionDescriptor.MethodInfo.GetCustomAttributes(false)
+                    .Any(a => a is AllowAnonymousAttribute))
                 return;
 
             var httpContext = httpContextAccessor.HttpContext;

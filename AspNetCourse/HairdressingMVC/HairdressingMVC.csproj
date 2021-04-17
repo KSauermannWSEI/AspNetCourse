@@ -20,4 +20,10 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Enums\Enums.csproj" />
+    <ProjectReference Include="..\WebApiClientHelpers\WebApiClientHelpers.csproj" />
+  </ItemGroup>
+
 </Project>

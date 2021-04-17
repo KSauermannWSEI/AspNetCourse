@@ -62,7 +62,7 @@ namespace HairdressingApi.Controllers
         //}
 
         [HttpPost]
-        [KeyAuthorize(RoleType.Customer, RoleType.Employee)]
+        //[KeyAuthorize(RoleType.Customer, RoleType.Employee)]
         public async Task<ActionResult<T>> Post(T item)
         {
             Logger.LogInformation("Post init");
@@ -71,7 +71,7 @@ namespace HairdressingApi.Controllers
             return CreatedAtAction(nameof(Get), new { id = item.Id }, item);
         }
         [HttpPut("{id}")]
-        [KeyAuthorize(RoleType.Employee)]
+        //[KeyAuthorize(RoleType.Employee)]
         public async Task<ActionResult> Put(int id, T item)
         {
             if (id != item.Id)
@@ -97,7 +97,7 @@ namespace HairdressingApi.Controllers
             return NoContent();
         }
         [HttpDelete("{id}")]
-        [KeyAuthorize(RoleType.Employee)]
+        //[KeyAuthorize(RoleType.Employee)]
         public async Task<ActionResult<T>> Delete(int id)
         {
             var item = await repository.GetAsync(id);

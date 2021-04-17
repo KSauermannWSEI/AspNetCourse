@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Price>
+
+<a class="btn btn-primary" asp-action="Create">Dodaj</a>
+<hr />
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Id</th>
+        <th>Cena</th>
+        <th>Waluta</th>
+    </tr>
+    @foreach (var price in Model)
+    {
+        <tr>
+            <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@price.Id">Usuń</a>
+                <a class="btn btn-dark" asp-action="Edit" asp-route-id="@price.Id">Edytuj</a>
+            </td>
+            <td>@price.Id</td>
+            <td>@price.PriceValue</td>
+            <td>@price.Currency</td>
+        </tr>
+    }
+</table>
