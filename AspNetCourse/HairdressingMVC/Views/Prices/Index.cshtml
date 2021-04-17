@@ -21,4 +21,7 @@
             <td>@price.Currency</td>
         </tr>
     }
+    <tr>
+        <td colspan="4">@await Component.InvokeAsync("PricesCounter")</td>
+    </tr>
 </table>
