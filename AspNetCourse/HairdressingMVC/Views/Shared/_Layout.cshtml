@@ -36,6 +36,7 @@
         </nav>
     </header>
     <div class="container">
+        @await Html.PartialAsync("_Info")
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

@@ -62,7 +62,7 @@ namespace HairdressingApi.Controllers
         //}
 
         [HttpPost]
-        //[KeyAuthorize(RoleType.Customer, RoleType.Employee)]
+        [KeyAuthorize(RoleType.Employee)]
         public async Task<ActionResult<T>> Post(T item)
         {
             Logger.LogInformation("Post init");

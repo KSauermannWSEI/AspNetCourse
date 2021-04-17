@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
@@ -12,12 +13,17 @@ namespace WebApiClientHelpers
     {
         private readonly string concreteAddress;
         public HttpClient Client;
-        public WebApiClient(string baseAddress, string concreteAddress)
+        public WebApiClient(string baseAddress, string concreteAddress, string apiKey = null)
         {
             Client = new HttpClient
             {
                 BaseAddress = new Uri(baseAddress)
             };
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            if (apiKey != null)
+            {
+                Client.DefaultRequestHeaders.Add("api-key", apiKey);
+            }
             this.concreteAddress = concreteAddress;
         }
         public async Task<T> GetAsync(int id)
